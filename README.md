@@ -1,76 +1,70 @@
 # Fiscally Harness
 
-An MIT-licensed, **product-neutral Codex starter harness** for projects using Symfony/PHP, React/TanStack/Tailwind/shadcn, and Tauri/Rust.
+A product-neutral Codex engineering harness for **Symfony/PHP + React/TanStack/Tailwind/shadcn + optional Tauri/Rust**.
 
-This repository contains **instructions, rules, skills, and an issue workflow**, not an initialized application. It is inspired by the engineering workflow developed while building Fiscally, but **does not import any Fiscally application code, branding rules, data, or internal packages**.
+This repository contains agent instructions, detailed technical rules, skills and a file-based issue workflow. It is not an initialized application. Despite the repository name, nothing in the harness requires any Fiscally application or internal package.
 
-## Quick start
+## Getting started
 
-1. Use this repository as a template or clone it and change the project name.
-2. Read [AGENTS.md](AGENTS.md), [frontend/AGENTS.md](frontend/AGENTS.md), [backend/AGENTS.md](backend/AGENTS.md), and [docs/AGENTS.md](docs/AGENTS.md).
-3. Initialize your own Symfony app under `backend/` and React workspace under `frontend/`. Put Tauri under the relevant frontend app's `src-tauri/`.
-4. Adjust project-specific decisions (package manager, PHP target, naming, platform targets) in local AGENTS documents. **Do not invent configured commands or dependencies**.
-5. Write work items in `docs/issues/0-draft/`; move ready, bounded work to `1-new/`.
-6. Open Codex from the repository root and ask it to implement one ready issue using the [issue-execution skill](.agents/skills/issue-execution/SKILL.md).
-
-Example prompt:
-
-```text
-Read AGENTS.md and docs/AGENTS.md. Execute docs/issues/1-new/0001-example-endpoint.md.
-Inspect existing code before editing. Move the issue through the documented lifecycle,
-run relevant available checks, commit only your own work, and report the commit SHA.
+```bash
+git clone https://github.com/hktr92/fiscally-harness.git
+cd fiscally-harness
+codex
 ```
 
-The included example is a **template**, not a task to run before an application exists.
+Read the root [AGENTS.md](AGENTS.md), then the nearest `frontend/AGENTS.md`, `backend/AGENTS.md` or `docs/AGENTS.md` for your task. Initialize the application in `backend/` and `frontend/` when needed. Tauri typically lives under the owning frontend app's `src-tauri/`. Adapt dependencies and scripts based on the real project.
 
-## Repository map
+## Included
 
-| Path | Responsibility |
+| Location | Purpose |
 | --- | --- |
-| `AGENTS.md` | Root routing, repository-wide discipline |
-| `.agents/rules/` | Contextual technical constraints (read via AGENTS routing; not implicitly auto-loaded) |
-| `.agents/skills/*/SKILL.md` | Repeatable workflows that Codex can discover |
-| `frontend/AGENTS.md` | React/TanStack/UI and Tauri development |
-| `backend/AGENTS.md` | Symfony/PHP/Doctrine conventions |
-| `docs/AGENTS.md` | Docs authority and issue lifecycle |
-| `docs/issues/` | Draft → ready → in progress → done |
-| `docs/architecture/` | Architecture decisions and diagrams |
-| `docs/decisions/` | Short ADRs |
+| `AGENTS.md` and nested `AGENTS.md` | Router and local project instructions |
+| `.agents/rules/general/` | Discovery, changes and quality checks |
+| `.agents/rules/php/` | PHP, Symfony, DTO contracts, Doctrine, import boundaries and validation |
+| `.agents/rules/frontend/` | React, API clients, Tailwind/shadcn, WebView and QA |
+| `.agents/rules/tauri/` | Rust, Tauri security, native workflow and Android release |
+| `.agents/skills/*/SKILL.md` | Detailed, reusable Codex workflows |
+| `docs/issues/` | Local Git-versioned issue lifecycle |
+| `docs/architecture/`, `docs/decisions/` | Architecture and ADR documentation |
 
-**Rules vs skills:** a rule states a constraint (e.g. dependency direction); a skill explains *how* to perform a task (e.g. change an API contract). Read only the rules and skills relevant to current work.
+Rules are context-specific documents. `.agents/rules/` **is not automatically loaded in full**: the relevant AGENTS file tells the agent which rules to read. Skills are discoverable through their SKILL.md metadata.
 
-## Issue lifecycle
+## Issues
 
-`0-draft` for exploration; `1-new` for actionable issues; `2-in-progress` for active implementation; `3-done` only after acceptance criteria and relevant checks are satisfied. See [docs/AGENTS.md](docs/AGENTS.md) and [issue template](docs/issues/TEMPLATE.md). The workflow is file-based; it does not automatically synchronize GitHub Issues.
+```text
+0-draft/      Human-owned investigation and planning
+1-new/        Ready with acceptance criteria
+2-in-progress/ Claimed, implemented and validated
+3-done/       Completed, date-prefixed YYYYMMDD-<id>-<slug>.md
+```
 
-## Stack assumptions
+The flow uses a claim commit where appropriate, implementation and integration checks, then a completion commit. Leave blocked work in progress. See [docs/AGENTS.md](docs/AGENTS.md), [template](docs/issues/TEMPLATE.md), [example](docs/issues/EXAMPLE.md) and [issue-execution skill](.agents/skills/issue-execution/SKILL.md).
 
-React, TypeScript, TanStack Router/Query/Form, Tailwind CSS v4, shadcn/Radix and pnpm are **preferred examples**, not unconditional dependencies. Symfony, Doctrine, PHP tooling and Tauri/Rust conventions are likewise conditional on what the project actually installs. Check manifests and lockfiles first. A single React app is fine; an `apps/` + `packages/` workspace is optional.
+## Skills
+
+`issue-execution`, `symfony-feature`, `doctrine-migration`, `react-feature`, `ui-review`, `tauri-native-change`, `code-clarity`, `file-import`, `api-contract-change`, `tauri-android-release`, `project-bootstrap`.
+
+No mandatory subagents. Small changes should not require lengthy planning or new dependencies. Always discover versions and configured scripts before using tooling.
 
 ## Optional Codex integrations
 
-The harness runs without any external Codex plugin:
+The harness works without external plugins.
 
-| Integration | Policy |
+| Integration | Status |
 | --- | --- |
-| `agent-lsp` | Recommended optional semantic navigation/refactor tool, when available |
-| `unslop` | Optional cleanup pass; never a replacement for tests or review |
-| `code-clarity` | **Included skill**, works without agent-lsp (uses it only if present) |
-| `ponytail` | Optional personal preference; not a dependency |
-| [snowe-ui-skill](https://github.com/What0ff/snowe-ui-skill) | Worth reviewing for UI audit ideas; **not bundled or installed** |
-| `superpowers` | **Excluded**. No mandatory subagent-driven development or verbose ritual workflow |
+| `agent-lsp` | Optional, recommended for semantic navigation and refactoring |
+| `unslop` | Optional cleanup, not a test substitute |
+| `code-clarity` | Included skill, can use agent-lsp when available |
+| `ponytail` | Optional and never required |
+| [snowe-ui-skill](https://github.com/What0ff/snowe-ui-skill) | Reference only. Not bundled or installed |
+| `superpowers` | Excluded. No mandatory subagent-driven development |
 
-Do not assume these integrations are available; verify them in the running Codex environment. Install instructions and upstream compatibility must come from each project's official repository.
+Check each external project's official documentation before installing it.
 
-## Design principles
+## What was adapted
 
-- Minimum ceremony for small tasks; plan only when work warrants it.
-- No forced subagents, gratuitous dependency layers, or new packages without justification.
-- No fabricated validation results or claims that a check ran when it did not.
-- Keep changes scoped; preserve uncommitted user-owned changes.
-- Keep credentials, private datasets, keys, signing material, and secrets outside Git.
-- Commit one coherent issue at a time, with a useful handoff.
+The technology rules were restored in detail from the available engineering rule documents, with internal package names, product-specific constraints and domain assumptions generalized. The **original full skill catalog and original AGENTS files were not supplied**, so the AGENTS and skills included here are reconstructions, **not byte-for-byte imports**. The large product-specific mobile design guide has not been copied verbatim.
 
 ## License
 
-[MIT](LICENSE) © 2026 hktr92.
+[MIT](LICENSE), © 2026 hktr92.
