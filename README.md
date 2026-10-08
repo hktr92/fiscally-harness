@@ -55,16 +55,16 @@ The harness works without external plugins.
 | --- | --- |
 | `agent-lsp` | Optional, recommended for semantic navigation and refactoring |
 | `unslop` | Optional cleanup, not a test substitute |
-| `code-clarity` | Included skill, can use agent-lsp when available |
+| `code-clarity` | Included **read-only audit skill**; uses agent-lsp when available and never edits application source |
 | `ponytail` | Optional and never required |
 | [snowe-ui-skill](https://github.com/What0ff/snowe-ui-skill) | Reference only. Not bundled or installed |
 | `superpowers` | Excluded. No mandatory subagent-driven development |
 
 Check each external project's official documentation before installing it.
 
-## What was adapted
+## Porting status and provenance
 
-The technology rules were restored in detail from the available engineering rule documents, with internal package names, product-specific constraints and domain assumptions generalized. The **original full skill catalog and original AGENTS files were not supplied**, so the AGENTS and skills included here are reconstructions, **not byte-for-byte imports**. The original product-specific design guide was adapted into a smaller generic mobile/WebView guide; brand- and finance-specific sections were intentionally omitted.
+The technology rules were restored in detail from the available engineering rule documents, with internal package names, product-specific constraints and domain assumptions generalized. The original [code-clarity](.agents/skills/code-clarity/SKILL.md) skill **was recovered from an earlier source file** and ported with its evidence-driven, read-only audit workflow intact. The Fiscally-specific architecture overlay and domain examples were replaced with generic Symfony/React/Tauri guidance; agent-lsp was made optional for portability. Other skills and the AGENTS files remain **reconstructions**, not verbatim copies: their original source files have not yet been recovered. The original product-specific design guide was adapted into a smaller generic mobile/WebView guide; brand- and finance-specific sections were intentionally omitted.
 
 ## License
 

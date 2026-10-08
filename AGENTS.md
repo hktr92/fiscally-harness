@@ -16,6 +16,7 @@ This is a generic Symfony + React + Tauri **engineering harness**, not an initia
 - Keep diffs small and reviewable. Don't format unrelated code, edit generated files casually or change cross-app architecture silently.
 - User-owned uncommitted files must be preserved. Never use destructive Git cleanup/reset/force push without explicit permission.
 - For tracked issues, follow `docs/AGENTS.md` and the `issue-execution` skill, including claim, integration QA, completion naming and commits.
+- `code-clarity` is strictly a **read-only source audit**. It may write audit/issue documentation, but must not modify application code, tests or runtime configuration.
 
 ## Quality and handoff
 
