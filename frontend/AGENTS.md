@@ -1,13 +1,24 @@
 # Frontend agent instructions
 
-Apply in `frontend/`. Before changes, read the relevant rules from `../.agents/rules/frontend/`, `../.agents/rules/tauri/`, and general rules.
+Applies in `frontend/`. Start with root `AGENTS.md` and selectively read `../.agents/rules/frontend/`; for Tauri/Rust, also read relevant `../.agents/rules/tauri/`.
 
-- Discover whether this is a single React app or pnpm workspace from package manifests. Do not impose `apps/` and `packages/` unnecessarily.
-- Prefer TypeScript, reusable components, TanStack ecosystem, Tailwind/shadcn conventions where already chosen.
-- Keep route definitions thin; place nontrivial screens and data logic in feature modules.
-- Server state belongs in TanStack Query when present; don't duplicate it in ad hoc global state.
-- Prefer the project's configured component system. Never import nonexistent `@project/ui` or any other hypothetical package.
-- Use accessible labels, focus states, safe areas and mobile/WebView behavior where relevant.
-- Check actual package scripts before running lint, typecheck, tests or build.
-- For Tauri work inspect Cargo.toml, tauri.conf.json, capability files and frontend plugin dependencies together.
-- Applicable skills: `react-feature`, `ui-review`, `tauri-native-change`, `code-clarity`.
+## Discovery
+
+- Inspect the actual `package.json` and lockfile before assuming React/TanStack/Tailwind versions or runnable commands.
+- A single application is fine; use `apps/` and `packages/` only when the workspace actually needs them.
+- React, TypeScript, TanStack Router/Query/Form, Tailwind v4, shadcn/Radix and pnpm are the preferred examples, not fabricated dependencies.
+
+## Implementation
+
+- Keep routes thin; move nontrivial UI and state to feature modules.
+- Treat API contracts as backend-owned. Use the existing typed transport/hook boundary.
+- Prefer installed shared UI components; never import a placeholder or nonexistent internal package.
+- Preserve accessibility, keyboard and platform-targeted ergonomics.
+- On mobile/WebView, follow the detailed `mobile-webview.md` and `DESIGN_GUIDELINES.md` where applicable.
+- On native work, inspect `src-tauri/Cargo.toml`, capabilities, Tauri config and both Rust and JavaScript plugin registration.
+
+## Skills and checks
+
+- Relevant workflows: `react-feature`, `ui-review`, `api-contract-change`, `tauri-native-change`, `tauri-android-release`, `code-clarity`.
+- Inspect scripts before lint, typecheck, tests or build.
+- Use scoped checks where possible. Separate new failures from inherited failures.

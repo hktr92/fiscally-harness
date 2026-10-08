@@ -1,29 +1,45 @@
-# ISSUE-ID: Short actionable title
+# ISSUE-ID: Specific, actionable title
 
 Status: draft | new | in-progress | done
 
 ## Context
-What exists, what's wrong, and why this work is needed.
+
+Existing behavior, observable problem/opportunity, and references to relevant source files.
 
 ## Objective
-Describe the observable outcome.
+
+The outcome to achieve, phrased so someone can check it.
 
 ## Scope
-- In scope:
-- Out of scope:
 
-## Constraints
-Dependencies, compatibility, privacy, and architectural restrictions.
+**In scope**
+- ...
+
+**Out of scope**
+- ...
+
+## Constraints and dependencies
+
+Versions, public contracts, security, compatibility, external prerequisites and relevant existing decisions.
 
 ## Acceptance criteria
-- [ ] Observable result 1
-- [ ] Relevant regression covered
 
-## Validation
-Document commands to run **if present**, manual checks, and expected outcomes.
+- [ ] Observable outcome with unambiguous conditions
+- [ ] Regression test or explicit manual verification
+- [ ] Relevant API/UX/security behavior verified when applicable
 
-## Implementation notes
-Fill during work; explain material trade-offs.
+## Validation plan
+
+Relevant configured commands and any specific manual/device/integration verification. Do not invent scripts.
+
+## Implementation / investigation notes
+
+Fill while working; note actual changes, decisions and trade-offs.
+
+## Validation evidence
+
+Command, result, environment, and details of any blocker/inherited failure.
 
 ## Handoff
-Checks/results, blockers, commit SHA (when finished).
+
+Completion date, status, limitations, remaining issues and commit SHA.

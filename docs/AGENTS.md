@@ -1,26 +1,39 @@
-# Documentation and file-based issue workflow
+# Documentation and issue workflow
 
-`docs/` is the source of truth for decisions and the local issue queue. Don't turn document-only requests into application implementation without instruction.
+This directory owns decisions, engineering context and a file-based, Git-versioned issue lifecycle. Read root `AGENTS.md` first. See `../.agents/skills/issue-execution/SKILL.md` for the full implementation procedure.
 
-## Issue states
-- `issues/0-draft/`: open questions, exploration, unclear scope.
-- `issues/1-new/`: ready, bounded issue with objective, constraints and verifiable acceptance criteria.
-- `issues/2-in-progress/`: active work. Move the issue here **before code edits** when executing it.
-- `issues/3-done/`: satisfied acceptance criteria, relevant checks run, status/handoff recorded.
+## States and ownership
 
-Move **one file** between directories; do not duplicate active issues. On blocked work, keep it in progress and record the blocker; don't mark it done. The operator may choose a different workflow explicitly.
+- `issues/0-draft/`: human-owned discovery space. Codex may edit drafts only when explicitly asked; never auto-execute them.
+- `issues/1-new/`: accepted, actionable and bounded. Each ready issue has clear scope and verifiable acceptance criteria.
+- `issues/2-in-progress/`: a claimed issue being investigated, implemented and reviewed.
+- `issues/3-done/`: completed artifacts and validation evidence. Use `YYYYMMDD-<issue-id>-<slug>.md` when closing.
 
-## Executing an issue
-1. Read the complete issue and related instructions.
-2. Inspect repository state and existing code; preserve user-owned changes.
-3. Move to `2-in-progress`; implement within scope; update the issue with decisions and evidence.
-4. Run affected checks; document exact commands and any limitations or inherited failures.
-5. When acceptance criteria are met, move to `3-done`; commit task-owned code **and** issue movement in one coherent commit.
-6. Report changed files, checks, remaining risks, and commit SHA.
+Do not maintain competing active copies. Move the same file through states. Do not confuse these folders with GitHub Issues; synchronization is not automatic.
 
-Use `issues/TEMPLATE.md` to create new issues and `../.agents/skills/issue-execution/SKILL.md` for repeatable execution. Don't auto-run `0001-example-endpoint.md` before an application exists.
+## Claim / plan / build / verify / close
 
-## Docs
-- Keep architecture docs factual; mark proposals as proposals.
-- Record decisions in `decisions/` using context, decision, consequences.
-- Don't write fictional benchmark or test results.
+1. Inspect Git status and current task ownership; never overwrite unrelated changes.
+2. Read the whole issue and its referenced docs before implementation.
+3. Move a ready issue from `1-new/` to `2-in-progress/`. A dedicated claim commit is preferred for auditability when the workflow is being followed end-to-end; commit only the move.
+4. Investigate existing behavior. For material work, record a bounded implementation plan. Avoid verbose plans for trivial changes.
+5. Implement, validate and review against *every* acceptance criterion.
+6. Run relevant configured quality gates, then any integration gate needed for cross-boundary work.
+7. Record actual commands/results, changes, any inherited failures, risks and follow-ups.
+8. If done, date-prefix and move the issue under `3-done/`, then commit the task-owned code and closing move. Report SHA.
+9. If blocked, keep in `2-in-progress/` with an actionable blocker. Never mark done merely because code was written.
+
+## Issue hygiene
+
+- Preserve the issue identifier across moves and commits.
+- Split oversized work into separate issues with explicit dependencies.
+- Keep active issues concise but executable without mind-reading.
+- Mark acceptance checkboxes only when evidence exists.
+- Use `issues/TEMPLATE.md` and `issues/EXAMPLE.md` as the format reference.
+- Do not move work out of `0-draft/` automatically or treat `3-done/` as a todo queue.
+
+## Architecture and decisions
+
+- `architecture/` documents existing mechanisms, distinguishing proposed from shipped behavior.
+- `decisions/` holds concise ADRs with context, decision and consequences.
+- Never invent tests, metrics, external system state or executed commands.
