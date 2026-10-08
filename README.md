@@ -25,6 +25,7 @@ Read the root [AGENTS.md](AGENTS.md), then the nearest `frontend/AGENTS.md`, `ba
 | `.agents/rules/tauri/` | Rust, Tauri security, native workflow and Android release |
 | `.agents/skills/*/SKILL.md` | Detailed, reusable Codex workflows |
 | `docs/issues/` | Local Git-versioned issue lifecycle |
+| [`frontend/DESIGN_GUIDELINES.md`](frontend/DESIGN_GUIDELINES.md) | Generic iOS/Android WebView UX guidance |
 | `docs/architecture/`, `docs/decisions/` | Architecture and ADR documentation |
 
 Rules are context-specific documents. `.agents/rules/` **is not automatically loaded in full**: the relevant AGENTS file tells the agent which rules to read. Skills are discoverable through their SKILL.md metadata.
@@ -63,7 +64,7 @@ Check each external project's official documentation before installing it.
 
 ## What was adapted
 
-The technology rules were restored in detail from the available engineering rule documents, with internal package names, product-specific constraints and domain assumptions generalized. The **original full skill catalog and original AGENTS files were not supplied**, so the AGENTS and skills included here are reconstructions, **not byte-for-byte imports**. The large product-specific mobile design guide has not been copied verbatim.
+The technology rules were restored in detail from the available engineering rule documents, with internal package names, product-specific constraints and domain assumptions generalized. The **original full skill catalog and original AGENTS files were not supplied**, so the AGENTS and skills included here are reconstructions, **not byte-for-byte imports**. The original product-specific design guide was adapted into a smaller generic mobile/WebView guide; brand- and finance-specific sections were intentionally omitted.
 
 ## License
 
