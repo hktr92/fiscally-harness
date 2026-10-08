@@ -1,0 +1,50 @@
+# Local environment & secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.keystore
+*.jks
+*.mobileprovision
+*.provisionprofile
+secrets/
+!.gitkeep
+
+# Editors / OS
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Frontend
+node_modules/
+dist/
+build/
+coverage/
+.turbo/
+.next/
+.vite/
+*.tsbuildinfo
+
+# Symfony / PHP
+vendor/
+var/
+.phpunit.result.cache
+.phpunit-watcher.yml
+composer.phar
+
+# Rust / Tauri
+target/
+src-tauri/target/
+**/src-tauri/gen/
+*.apk
+*.aab
+
+# Runtime
+*.log
+tmp/
+.cache/

@@ -1,0 +1,2 @@
+# PHP coding style
+Detect target PHP version from Composer/runtime. Prefer PSR-12, strict_types, explicit native types, small typed classes, early returns, and constructor injection. Prefer readonly/final when compatible; Doctrine entities are an exception. This harness favors `null|Type` over `?Type`, explicit attributes, named arguments for complex calls, and small focused controllers. Do not add syntax unsupported by the configured PHP target.

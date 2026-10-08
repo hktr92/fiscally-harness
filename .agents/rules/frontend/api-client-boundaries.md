@@ -1,0 +1,2 @@
+# Frontend API boundaries
+Centralize HTTP client configuration, error parsing and typed DTOs. Keep transport code separate from React hooks where complexity warrants it; React apps can consume TanStack Query hooks. Do not introduce multiple package layers for a tiny app. Treat backend contracts as the source of truth. Use stable query keys; invalidate or update affected caches after mutations. Centralize auth-token handling; never log tokens.

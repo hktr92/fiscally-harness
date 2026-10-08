@@ -1,0 +1,2 @@
+# UI component conventions
+Prefer the project's shared shadcn/Radix primitives and Tailwind semantic tokens; use app-local composition for product workflows. Keep typed components small. Preserve keyboard support, explicit labels, focus/disabled/loading states, predictable wrapping, responsive spacing and readable contrast. Use lucide-react only if installed. Do not assume a package called @project/ui exists.
