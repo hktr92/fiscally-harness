@@ -4,15 +4,16 @@ Use this rule for external CSV, spreadsheet, image, document, or provider data i
 
 ## Directory Roles
 
-- `lib/Import/` contains extractable parsers, format detectors, and provider adapters.
-- `lib/Fs/` may contain reusable filesystem, path, and stream helpers.
-- `src/Command/` and `src/Service/` orchestrate importing and persistence in Symfony.
-- `include/` contains owned contracts or DTOs when import results cross an application boundary.
+`coding-boundaries.md` owns directory roles, dependency direction and tenant isolation. For imports:
+
+- `lib/` holds extractable parsers, format detectors, provider adapters and filesystem, path and stream helpers. `lib/Import/` and `lib/Fs/` are example paths.
+- `src/Command/` and `src/Service/` orchestrate importing and persistence in Symfony, and enforce tenant isolation for every imported record.
+- `include/` holds owned contracts or DTOs when import results cross an application boundary. Parsers may use those types directly.
 
 ## Handlers and Detection
 
 - Define a project-owned import contract when multiple formats require one; do not invent it for a single small parser.
-- Keep provider-specific parsing under `lib/Import/<Provider>/` or `lib/Import/Handler/`.
+- Keep provider-specific parsing in its own `lib/` subdirectory, for example `lib/Import/<Provider>/` or `lib/Import/Handler/`.
 - Handler support detection should be deterministic, based on headers, signatures, or structured layout.
 - Tolerate ordinary noise only when the external format has documented irregularities.
 - Symfony tags or discovery mechanisms must match the installed framework and the project's actual service configuration.

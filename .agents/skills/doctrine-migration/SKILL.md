@@ -8,7 +8,7 @@ description: Plan and safely review Doctrine ORM mapping and SQL migrations.
 
 ## Preparation
 
-1. Read `backend/AGENTS.md`, `php/dependency-boundaries.md` and `php/symfony-project.md`.
+1. Read `backend/AGENTS.md`, `php/coding-boundaries.md` and `php/symfony-project.md`.
 2. Inspect Doctrine ORM/DBAL versions, mappings, database platform and migration configuration.
 3. Review previous migrations and entities for conventions and backward compatibility.
 4. Identify migration risk: dropped columns, nullability, renames, type conversion, locks and backfills.

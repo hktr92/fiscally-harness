@@ -5,10 +5,7 @@ Applies in `backend/`. Start with root `AGENTS.md`; selectively read `../.agents
 ## Architecture
 
 - Symfony is the runtime, not the only application boundary.
-- This kit favors `include/` (DTOs/contracts/enums), `lib/` (extractable adapters/parsers) and `src/` (Symfony/Doctrine runtime), but use the established project layout if different.
-- `include/` must not depend on `src/` or `lib/`; `lib/` must not depend on `src/`.
-- Use owned DTOs/contracts at boundaries. Never leak Doctrine entities as API responses.
-- Keep controllers narrow; place app workflows in services/contracts and integrations in adapters.
+- The `include/` / `lib/` / `src/` boundary is mandatory, and so is tenant isolation. Read `../.agents/rules/php/coding-boundaries.md` before backend changes; it is the single source for directory roles, dependency direction, contract ownership and tenant rules.
 
 ## Project discovery and safety
 

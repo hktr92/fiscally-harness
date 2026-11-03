@@ -725,7 +725,8 @@ Investigate whether each layer preserves its intended responsibility.
 
 ### Backend
 
-For Symfony projects using the optional three-directory convention:
+For Symfony projects using the three-directory convention (mandatory in this
+harness; see `.agents/rules/php/coding-boundaries.md`):
 
     include/
         Owned DTOs, value objects, contracts, enums and boundary exceptions.

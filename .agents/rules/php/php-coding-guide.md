@@ -84,8 +84,7 @@ return $this->someService->create(
 
 ## Symfony Style
 
-- Controllers must inject service contracts, not concrete service implementations.
-- Concrete services that implement contracts from `include/Contract/` must use `#[AsAlias]` with the explicit interface id.
+- Controller injection and `#[AsAlias]` for contract implementations follow `coding-boundaries.md`.
 - When a DTO API controller grows beyond 150 visual lines or accumulates many route actions, split it into one-route action classes with `__invoke()`.
 - Place one-route action classes in a feature directory such as `src/Controller/Some/SomeCreateAction.php`, `SomeUpdateAction.php`, and `SomeDeleteAction.php`.
 - Before adding Symfony code that depends on a component or bundle, confirm the dependency exists in Composer metadata.
@@ -111,10 +110,7 @@ return $this->someService->create(
 
 ## Boundaries
 
-- Keep framework types out of boundary contracts and DTOs unless the contract is explicitly framework-facing.
-- Keep Doctrine entities inside the application runtime boundary.
-- Prefer DTOs and small value objects at application boundaries.
-- If a framework runtime value needs to cross into `include/`, convert it into an owned DTO or value object first.
+- `coding-boundaries.md` owns the boundary rules: runtime-independent contracts, entity containment, owned DTOs and value objects, and tenant isolation.
 
 ## Project Tooling
 

@@ -15,17 +15,13 @@ description: Implement a Symfony service, controller or backend use case while p
 
 ## Design
 
-- Follow `include/` → `lib/` → `src/` direction when used by the project.
-- `include/Dto/` defines request/response shapes; `include/Contract/` defines use cases.
-- `src/` owns Symfony controllers, concrete services, Doctrine repositories, security and commands.
-- `lib/` is for extractable integrations and parsers, not persistence or application decisions.
+- Follow `php/coding-boundaries.md`: the mandatory `include/` / `lib/` / `src/` boundary, contract ownership and tenant isolation.
 - Controllers validate/map input, call a service/contract and return typed output.
-- Don't leak Doctrine entities, Symfony Request/Response or EntityManager through owned DTO contracts.
 - Keep authorization at the correct boundary and failures explicit.
 
 ## Implementation
 
-5. Add or amend DTO/contract first when the feature crosses an API boundary.
+5. Reuse existing DTOs/contracts first. When the feature needs a new or changed public boundary, propose its shape before implementing it.
 6. Implement the smallest service/runtime change and wire dependencies using existing conventions.
 7. Add actions/routes only after confirming installed route/serializer/bundle APIs.
 8. Add unit tests for pure logic; kernel/http tests for actual container and endpoint behavior.

@@ -5,18 +5,15 @@ Use this rule when orienting inside a Symfony backend, adding Symfony runtime co
 ## Project Shape
 
 - Treat Symfony as the runtime layer, not the whole application boundary.
-- Follow the three-directory boundary rule:
-  - `include/` contains DTOs, contracts, enums, domain exceptions, and boundary types.
-  - `lib/` contains extractable integrations, adapters, parsers, wrappers, and non-app support logic.
-  - `src/` contains Symfony runtime code: controllers, services, entities, repositories, commands, event subscribers, voters, fixtures, listeners, and app workflows.
-- Do not copy default Symfony examples that place DTOs, contracts, or domain exceptions in `src/` when this pack's boundary rules apply.
+- Follow `coding-boundaries.md` for the mandatory `include/` / `lib/` / `src/` boundary and tenant isolation.
+- Do not copy default Symfony examples that place DTOs, contracts, or domain exceptions in `src/`.
 
 ## Runtime Directories
 
 - `src/Controller/` contains DTO API controllers and one-route action classes.
 - `src/Entity/` contains Doctrine ORM entities.
 - `src/Repository/` contains Doctrine repositories.
-- `src/Service/` contains concrete service implementations behind `include/Contract/` interfaces.
+- `src/Service/` contains concrete service implementations, including those behind `include/Contract/` interfaces.
 - `src/Command/` contains Symfony console commands.
 - `src/EventSubscriber/` contains event subscribers.
 - `src/Security/` contains voters and security runtime code.
@@ -33,8 +30,7 @@ Use this rule when orienting inside a Symfony backend, adding Symfony runtime co
 - Prefer Symfony attributes for service definitions when available.
 - Use `#[AsAlias]`, `#[AsCommand]`, `#[AsController]`, `#[AsEventListener]`, `#[AsMessage]`, `#[AsMessageHandler]`, `#[AsTwigFilter]`, `#[AsTwigFunction]`, `#[AsTwigTest]`, and `#[Autowire]` before YAML service wiring.
 - Keep YAML/PHP config for framework-level configuration, bundle configuration, environment settings, transport config, and parameters.
-- Controllers must inject service contracts, not concrete service implementations.
-- Concrete services implementing contracts from `include/Contract/` must declare an explicit `#[AsAlias]` because the three-directory boundary can break default service discovery assumptions.
+- Controller injection and `#[AsAlias]` for contract implementations follow `coding-boundaries.md`. The explicit alias is needed because the three-directory boundary can break default service discovery assumptions.
 
 ## Routing
 
@@ -63,10 +59,10 @@ Use this rule when orienting inside a Symfony backend, adding Symfony runtime co
 
 ## Imports
 
-- Keep external file parsing and row normalization in `lib/Import/` when the project has import workflows.
+- Keep external file parsing and row normalization in `lib/` (for example `lib/Import/`) when the project has import workflows.
 - Use `backend-import-boundaries.md` and the `file-import` skill for CSV
   and provider import handlers.
-- Keep commands and application services as orchestration; do not put business policy, database writes, or application orchestration into import adapters.
+- Keep commands and application services as orchestration; do not put business policy, application persistence workflows, or application orchestration into import adapters.
 
 ## Testing
 
